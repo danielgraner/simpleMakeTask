@@ -2,5 +2,5 @@
 
 void hello()
 {
-	printf("Hello world! Bassel sucks\n");
+	printf("Hello world!\n");
 }
