@@ -1,43 +1,26 @@
-
-
 name: C/C++ CI
-
-on: 
-  [push, pull_request]
-
+on:
+  push:
+    tags:
+    - 'v*'
+  pull_request:
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v2
- #   - name: configure
- #     run: ./configure
     - name: make
       run: make
     - name: make check
       run: make check
-#    - name: make distcheck
-#      run: make distcheck
-
-  # Sequence of patterns matched against refs/tags
-      tags:
-      - 'v*' 
-      # Push events to matching v*, i.e. v1.0, v20.15.10
-
-#name: Create Release
-    build:
-    name: Create Release
-      steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
+    - name: Checkout code
+      uses: actions/checkout@master
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-        with:
+      with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
           body: |
@@ -46,8 +29,3 @@ jobs:
             - Second Change
           draft: false
           prerelease: false
-   
-
-
-
-  
