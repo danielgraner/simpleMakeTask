@@ -4,7 +4,7 @@
 
 CC = gcc
 LD = gcc
-BINARY = hello.exe
+BINARY = hello
 BUILD = build
 
 #######################
@@ -35,8 +35,10 @@ build/%.o: %.c
 	$(CC) -c -o $@ $<
 
 
-check: $(TARGET_BINARY)@# Execute binary and verify output, it returns 0 (success) or 1 (fail)
+check: $(TARGET_BINARY)
+@# Execute binary and verify output, it returns 0 (success) or 1 (fail)
 	[ "$$($(TARGET_BINARY))" = "Hello world!" ]
 
 
 .PHONY: all clean
+
